@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  </head>
+  <body> 
+    <py-script>
+
+
+
+def calcular_surebet(odd1, odd2, valor_investimento):
+    try:
+        odd1 = float(odd1)
+        odd2 = float(odd2)
+        valor_investimento = float(valor_investimento)
+
+        inverso_odd1 = 1 / odd1
+        inverso_odd2 = 1 / odd2
+
+        total_inversos = inverso_odd1 + inverso_odd2
+
+        porcentagem_odd1 = (inverso_odd1 / total_inversos) * 100
+        porcentagem_odd2 = (inverso_odd2 / total_inversos) * 100
+
+        valor_aposta_odd1 = (valor_investimento * porcentagem_odd1) / 100
+        valor_aposta_odd2 = (valor_investimento * porcentagem_odd2) / 100
+
+        lucro_odd1 = valor_aposta_odd1 * odd1 - valor_investimento
+        lucro_odd2 = valor_aposta_odd2 * odd2 - valor_investimento
+
+        if lucro_odd1 > 0 and lucro_odd2 > 0:
+            return f"Surebet encontrada! Lucro com Odd 1: {lucro_odd1:.2f}, Lucro com Odd 2: {lucro_odd2:.2f}"
+        else:
+            return "Não há surebet."
+
+    except ValueError:
+        return "Certifique-se de inserir números válidos."
+
+# Exemplo de uso
+odd1 = input("Digite a odd para o Time A: ")
+odd2 = input("Digite a odd para o Time B: ")
+valor_investimento = input("Digite o valor de investimento: ")
+
+resultado = calcular_surebet(odd1, odd2, valor_investimento)
+print(resultado)
+print(resultado)
+
+ </py-script> 
+  </body>
+</html>
