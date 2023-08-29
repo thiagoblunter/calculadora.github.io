@@ -8,42 +8,83 @@
 
 
 
-def calcular_surebet(odd1, odd2, valor_investimento):
+# Importe o módulo tkinter para criar a interface gráfica
+import tkinter as tk
+
+# Função para calcular os valores de entrada, odds, investimento e lucro
+def calcular_surebet():
     try:
-        odd1 = float(odd1)
-        odd2 = float(odd2)
-        valor_investimento = float(valor_investimento)
-
-        inverso_odd1 = 1 / odd1
-        inverso_odd2 = 1 / odd2
-
-        total_inversos = inverso_odd1 + inverso_odd2
-
-        porcentagem_odd1 = (inverso_odd1 / total_inversos) * 100
-        porcentagem_odd2 = (inverso_odd2 / total_inversos) * 100
-
-        valor_aposta_odd1 = (valor_investimento * porcentagem_odd1) / 100
-        valor_aposta_odd2 = (valor_investimento * porcentagem_odd2) / 100
-
-        lucro_odd1 = valor_aposta_odd1 * odd1 - valor_investimento
-        lucro_odd2 = valor_aposta_odd2 * odd2 - valor_investimento
-
-        if lucro_odd1 > 0 and lucro_odd2 > 0:
-            return f"Surebet encontrada! Lucro com Odd 1: {lucro_odd1:.2f}, Lucro com Odd 2: {lucro_odd2:.2f}"
-        else:
-            return "Não há surebet."
-
+        # Obtenha as odds inseridas pelo usuário
+        odd1 = float(odd1_entry.get())
+        odd2 = float(odd2_entry.get())
+        odd3 = float(odd3_entry.get())
+        
+        # Obtenha o valor total do investimento inserido pelo usuário
+        investimento = float(investimento_entry.get())
+        
+        # Calcule os valores de entrada para cada seleção
+        valor1 = (investimento / odd1)
+        valor2 = (investimento / odd2)
+        valor3 = (investimento / odd3)
+        
+        # Calcule o lucro obtido
+        lucro = investimento - (valor1 + valor2 + valor3)
+        
+        # Atualize os rótulos de saída
+        valor1_label.config(text=f"Valor 1: {valor1:.2f}")
+        valor2_label.config(text=f"Valor 2: {valor2:.2f}")
+        valor3_label.config(text=f"Valor 3: {valor3:.2f}")
+        lucro_label.config(text=f"Lucro: {lucro:.2f}")
     except ValueError:
-        return "Certifique-se de inserir números válidos."
+        resultado_label.config(text="Por favor, insira números válidos.")
 
-# Exemplo de uso
-odd1 = input("Digite a odd para o Time A: ")
-odd2 = input("Digite a odd para o Time B: ")
-valor_investimento = input("Digite o valor de investimento: ")
+# Crie a janela da interface gráfica
+root = tk.Tk()
+root.title("Calculadora de Surebet")
 
-resultado = calcular_surebet(odd1, odd2, valor_investimento)
-print(resultado)
-print(resultado)
+# Crie e posicione rótulos e entradas para as odds e investimento
+odd1_label = tk.Label(root, text="Odd 1:")
+odd1_label.pack()
+odd1_entry = tk.Entry(root)
+odd1_entry.pack()
+
+odd2_label = tk.Label(root, text="Odd 2:")
+odd2_label.pack()
+odd2_entry = tk.Entry(root)
+odd2_entry.pack()
+
+odd3_label = tk.Label(root, text="Odd 3:")
+odd3_label.pack()
+odd3_entry = tk.Entry(root)
+odd3_entry.pack()
+
+investimento_label = tk.Label(root, text="Investimento:")
+investimento_label.pack()
+investimento_entry = tk.Entry(root)
+investimento_entry.pack()
+
+# Botão para calcular a surebet
+calcular_button = tk.Button(root, text="Calcular Surebet", command=calcular_surebet)
+calcular_button.pack()
+
+# Rótulos para mostrar os resultados
+valor1_label = tk.Label(root, text="")
+valor1_label.pack()
+
+valor2_label = tk.Label(root, text="")
+valor2_label.pack()
+
+valor3_label = tk.Label(root, text="")
+valor3_label.pack()
+
+lucro_label = tk.Label(root, text="")
+lucro_label.pack()
+
+resultado_label = tk.Label(root, text="")
+resultado_label.pack()
+
+# Inicie a interface gráfica
+root.mainloop()
 
  </py-script> 
   </body>
